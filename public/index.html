@@ -5,6 +5,38 @@
     <title>Home page</title>
   </head>
   <body>
-    <h1>Pass the url along with api to shorten it</h1>
+    <h1>API to shorten the url</h1>
+    <p>Instruction</p>
+    <ul>
+      <li>route for shorting url:- /new/(http|https)www.name.(com|in|org)<br>
+          Example:- https://https://fathomless-hollows-89322.herokuapp.com/new/https://www.google.com
+      </li>
+      <li>route for using shortened url:- /get/number <br>
+          Example:- https://fathomless-hollows-89322.herokuapp.com/get/0
+      </li>
+    </ul>
+    <ol id="urlList">
+    </ol>
   </body>
+  <script>
+    let url = 'http://localhost:3000/fetch'
+    let request = new XMLHttpRequest();
+    let ol = document.getElementById("urlList");
+    request.open("GET", url);
+    request.onload = ()=>{
+      if(request.status !== 200){
+        ol.innerHTML = `<li>Unable to retrived preloaded url</li>`;
+        return;
+      }
+    let arr = JSON.parse(request.response);
+    let tag = ``;
+    console.log(arr);
+    let i;
+    for(i=0;i< arr.length;i++){
+        tag = tag+`<li>https:${arr[i].sent_url} and ${arr[i].unique_number}</li>`;
+    }
+    ol.innerHTML=tag;
+    };
+    request.send(null);
+  </script>
 </html>

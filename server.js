@@ -4,7 +4,9 @@ const urlCheck = require('./middleware/urlCheck');
 
 let env = process.env.NODE_ENV || 'development';
 let port = process.env.PORT || 3000;
+console.log(port);
 
+let database;
 if(env === 'development') {
   MongoClient.connect('mongodb://localhost:27017/users', function(err, db){
       database=db;
@@ -15,7 +17,7 @@ if(env === 'development') {
   });
 }
 
-let database;
+
 
 
 
@@ -56,9 +58,16 @@ app.get('/get/:id',(req, res)=>{
     })
 });
 
-app.get('/get/', (req, res)=>{
-      res.status(400).send("The provided url does't ");
-});
+ app.get('/fetch', (req, res)=>{
+        let url_collection = database.collection('urls');
+        url_collection.find().toArray()
+        .then((arr)=>{
+          res.send(arr);
+        })
+        .catch((e)=>{
+          res.status(400).send();
+        });
+ });
 
 
 
