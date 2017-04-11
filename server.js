@@ -22,6 +22,8 @@ let database;
 
 let app = express();
 
+app.use('/', express.static(__dirname+'/public'));
+
 app.get('/new/:id', urlCheck,(req, res)=>{
   let urlCollection = database.collection('urls');
   urlCollection.insertOne(req.urlObject)
