@@ -48,15 +48,16 @@ app.get('/get/:id',(req, res)=>{
         res.status(400).send("The provided url does't exist in our database")
         return;
       };
-      res.writeHead(301,{Location: 'https://'+doc.sent_url});
-      res.end();
+      res.redirect(doc.sent_url);
+      // res.writeHead(301,{Location:doc.sent_url});
+      // res.end();
     }).catch((e)=>{
       res.status(404).send("Something Unexpected!!!!");
     })
 });
 
 app.get('/get/', (req, res)=>{
-      res.status(400).send("The provided url does't exist in our database");
+      res.status(400).send("The provided url does't ");
 });
 
 

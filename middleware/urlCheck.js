@@ -17,16 +17,14 @@ if(env === 'development') {
 
 
 module.exports = function(req, res, next) {
-  console.log("LOG");
-  let sent_url = req.params.id;
+  let sent_url = req.params['url']+req.params['0'];
   let unique_number;
   let result = /(http|https)\:\/\/\w{3}\.\w{1,}\.(com|in|org)/.test(sent_url);
+  sent_url = req.params['0'];
   if(!result){
     res.status(400).send("Please send a valid url");
-    next();
     return;
   }
-  console.log(result);
   if(!result) {
     res.status(406).send("Invalid URL");
     // database.close();
@@ -43,14 +41,12 @@ module.exports = function(req, res, next) {
 
       arr.forEach((doc)=>{
       result = (doc.sent_url!==sent_url);
-      console.log(result);
       if(!result){
         console.log("Duplicate");
         return;
       }
       });
       if(result){
-        console.log(arr);
         unique_number=arr[arr.length-1].unique_number+1;
         req.urlObject={unique_number, sent_url};
         console.log(req.urlObject);
