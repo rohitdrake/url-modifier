@@ -1,11 +1,20 @@
 const MongoClient = require('mongodb').MongoClient;
 
+let env = process.env.NODE_ENV || 'development';
 
 let database;
 
-MongoClient.connect('mongodb://localhost:27017/users', function(err, db){
-    database=db;
-});
+if(env === 'development') {
+  MongoClient.connect('mongodb://localhost:27017/users', function(err, db){
+      database=db;
+  });
+} else {
+  MongoClient.connect(process.env.MONGOLAB_URI, function(err, db){
+      database=db;
+  });
+}
+
+
 
 module.exports = function(req, res, next) {
   console.log("LOG");
