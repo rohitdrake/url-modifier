@@ -20,7 +20,7 @@ module.exports = function(req, res, next) {
   console.log("LOG");
   let sent_url = req.params.id;
   let unique_number;
-  let result = /(http|https)\:\/\/\w{1,}\.(com|in|org)/.test(sent_url);
+  let result = /(http|https)\:\/\/\w{3}\.\w{1,}\.(com|in|org)/.test(sent_url);
   if(!result){
     res.status(400).send("Please send a valid url");
     next();
