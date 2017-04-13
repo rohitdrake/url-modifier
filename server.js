@@ -7,8 +7,8 @@ const fetchUrl = require('./routes/fetch');
 
 
 let app = express();
-  
-MongoClient.connect(process.env.MONGOLAB_URI, function(err, db){
+console.log("OK!!!!!!");
+MongoClient.connect("mongodb://rohitdrake:userurls003#@ds157980.mlab.com:57980/userurls", function(err, db){
       app.use((req, res, next)=>{
       req.database=db;
       next();

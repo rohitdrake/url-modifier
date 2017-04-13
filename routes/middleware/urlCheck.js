@@ -1,5 +1,4 @@
 module.exports = function(req, res, next) {
-  console.log(req.params);
   let sent_url = req.params['url']+req.params['0'];
   let unique_number;
   let result = /(http|https)\:\/\/\w{3}\.\w{1,}\.(com|in|org)/.test(sent_url);
@@ -19,7 +18,8 @@ module.exports = function(req, res, next) {
     } else {
 
       arr.forEach((doc)=>{
-      result = (doc.sent_url!==('https:'+sent_url));
+        
+      result = (doc.sent_url !== sent_url);
       if(!result){
         console.log("Duplicate");
         return;
