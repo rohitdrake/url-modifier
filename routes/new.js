@@ -1,8 +1,8 @@
 const express = require('express');
 
-const router  = express.Router();
-
 const urlCheck = require('./middleware/urlCheck');
+
+const router  = express.Router();
 
 
 router.get('/:url*', urlCheck,(req, res)=>{

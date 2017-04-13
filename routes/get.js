@@ -14,8 +14,6 @@ router.get('/:id',(req, res)=>{
         return;
       };
       res.redirect(doc.sent_url);
-      // res.writeHead(301,{Location:doc.sent_url});
-      // res.end();
     }).catch((e)=>{
       res.status(404).send("Something Unexpected!!!!");
     })
