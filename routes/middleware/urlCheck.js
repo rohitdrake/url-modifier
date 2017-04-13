@@ -19,7 +19,7 @@ module.exports = function(req, res, next) {
     } else {
 
       arr.forEach((doc)=>{
-      result = (doc.sent_url!==sent_url);
+      result = (doc.sent_url!==('https:'+sent_url));
       if(!result){
         console.log("Duplicate");
         return;
